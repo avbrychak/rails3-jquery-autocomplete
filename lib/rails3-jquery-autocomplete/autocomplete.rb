@@ -40,7 +40,7 @@ module Rails3JQueryAutocomplete
     module ClassMethods
       def autocomplete(object, method, options = {}, &block)
 
-        define_method("get_prefix") do
+        define_method("get_prefix") do |_|
           'mongoid'
         end
         
