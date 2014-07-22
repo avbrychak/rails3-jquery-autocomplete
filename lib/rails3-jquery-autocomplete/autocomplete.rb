@@ -40,15 +40,10 @@ module Rails3JQueryAutocomplete
     module ClassMethods
       def autocomplete(object, method, options = {}, &block)
 
-        define_method("get_prefix") do |model|
-          if model.superclass == Object && model.include?(Mongoid::Document)
-            'mongoid'
-          elsif model.superclass == Object && model.include?(MongoMapper::Document)
-            'mongo_mapper'
-          else
-            'active_record'
-          end
+        define_method("get_prefix") do
+          'mongoid'
         end
+        
         define_method("get_autocomplete_order") do |method, options, model=nil|
           method("#{get_prefix(get_object(options[:class_name] || object))}_get_autocomplete_order").call(method, options, model)
         end
